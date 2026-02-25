@@ -7,7 +7,7 @@ pipeline {
         stage ('git checkout'){
             steps {
                 git url:'https://github.com/Divyasri30/spring-petclinic.git'
-                    branch: 'main'
+                    branch:'main'
             }
         }
         stage ('buid and scan'){
