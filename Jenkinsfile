@@ -12,7 +12,18 @@ pipeline {
         }
         stage ('build and scan'){
             steps{
-                sh 'mvn package'
+                 withCredentials([string(credentialId:'sonar_id' variable:'sonar')]){
+                    withSonarQubeEnv('SONAR'){
+                        sh """ mvn package sonar:sonar \
+                            -Dsonar.projectkey=divyasri30 \
+                            -Dsonar.organization=Divyasri30 \
+                            -Dsonar.host.url=https://sonarcloud.io/ \
+                            -Dsonar.login=sonar  """
+
+                    }
+                
+            }
+                
             }
 
         }
