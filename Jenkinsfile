@@ -18,13 +18,21 @@ pipeline {
                             -Dsonar.projectKey=divyasri30 \
                             -Dsonar.organization=divyasri30 \
                             -Dsonar.host.url=https://sonarcloud.io/ \
-                            -Dsonar.token=$SONAR_TOKEN  """
+                            -Dsonar.login=$SONAR_TOKEN  """
 
                     }
                 
             }
                 
             }
+
+        }
+    }
+
+    post {
+        always{
+            archiveArtifacts artifacts: '**/*.jar',
+            junit '**/surefire-reports/*.xml'
 
         }
     }
